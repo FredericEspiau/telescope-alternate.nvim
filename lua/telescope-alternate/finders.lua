@@ -260,12 +260,16 @@ function M.normalize_config(config)
   return new_config
 end
 
-function M.find_alternatve_files()
+function M.find_alternatve_files(focus)
   local current_file_name = utils.current_file_name()
 
   local matched_targets = {}
   local matched_strings = {}
   local config = vim.g.telescope_alternate_mappings or {}
+
+  if focus ~= nil and config[focus] ~= null then
+    config = config[focus]
+  end
 
   config = M.normalize_config(config)
 
